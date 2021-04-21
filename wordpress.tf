@@ -15,7 +15,6 @@ provider "aws" {
 resource "aws_security_group" "allow_http_and_ssh" {
   name        = "allow_http_and_ssh"
   description = "Allow web and ssh inbound traffic"
-  vpc_id      = "vpc-700fbd0d"
 
   ingress {
     description      = "http from anywere"
@@ -51,8 +50,15 @@ resource "aws_security_group" "allow_http_and_ssh" {
 }
 
 resource "aws_instance" "wordpress" {
-  ami           = "ami-096fda3c22c1c990a"
+  ami           = "ami-042e8287309f5df03"
   instance_type = "t2.micro"
   vpc_security_group_ids = ["${aws_security_group.allow_http_and_ssh.id}"]
+  key_name = "epam-new"
+  provisioner "local-exec" {
+    command = "ansible-playbook -i inventory playbook.yml"
+    
+  
+  }
 
 }
+
