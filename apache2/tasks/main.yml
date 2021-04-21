@@ -1,0 +1,18 @@
+---
+# tasks file for apache2
+
+ - name: apt update and install apache2
+   apt:
+     update_cache: yes
+     name: apache2
+     state: present
+   become: yes
+
+ - name: change apache default config file
+   copy:
+     src: 000-default.conf
+     dest: /etc/apache2/sites-available/000-default.conf
+   notify: reload_apache
+   become: yes
+
+

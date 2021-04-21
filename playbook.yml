@@ -1,0 +1,6 @@
+
+ - hosts: remote_server
+   roles:
+        - mysql
+        - apache2
+        - wordpress

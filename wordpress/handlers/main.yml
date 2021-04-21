@@ -1,0 +1,9 @@
+---
+# handlers file for wordpress
+
+ - name: reload_apache
+   service:
+     name: apache2
+     state: reloaded
+   become: yes
+

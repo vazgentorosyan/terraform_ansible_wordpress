@@ -1,0 +1,5 @@
+wp_mysql_user: wp_user
+wp_mysql_pass: epam_pass
+wp_db_name: wp_db
+mysql_root_pass: Aa123456
+

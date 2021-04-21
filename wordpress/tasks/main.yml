@@ -1,0 +1,39 @@
+---
+# tasks file for wordpress
+
+ - name: Install php modules
+   apt:
+     name:
+       - php-curl
+       - php-gd
+       - php-mbstring
+       - php-xml
+       - php-xmlrpc
+       - php-soap
+       - php-intl
+       - php-zip
+       - php
+       - php-mysql
+       - libapache2-mod-php
+     state: present
+   become: yes
+
+ - name: check wordpress folder existing
+   stat: path=/var/www/html/wordpress
+   register: check_path
+
+ - name: download and unarchive wordpress
+   unarchive:
+     src: http://wordpress.org/latest.tar.gz
+     dest: /var/www/html/
+     remote_src: yes
+   become: true
+   when: not check_path.stat.exists
+
+ - name: copy WP sample config to config
+   template:
+     src: wp-config.j2
+     dest: /var/www/html/wordpress/wp-config.php
+   notify: reload_apache
+   become: yes
+
