@@ -49,6 +49,15 @@ resource "aws_security_group" "allow_http_and_ssh" {
   }
 }
 
+resource "local_file" "inventory" {
+ content = templatefile("inventory.tmpl",
+ {
+  public_ip=aws_instance.wordpress.public_ip
+ }
+ )
+ filename = "inventory"
+}
+
 resource "aws_instance" "wordpress" {
   ami           = "ami-042e8287309f5df03"
   instance_type = "t2.micro"
