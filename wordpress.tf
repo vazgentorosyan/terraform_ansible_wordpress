@@ -71,6 +71,9 @@ resource "null_resource" "run_ansible" {
     command = "sleep 40 && ansible-playbook -i inventory playbook.yml"
   
   }
+  depends_on = [
+    aws_instance.wordpress
+  ]
   
 }
 
