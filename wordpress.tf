@@ -73,5 +73,4 @@ resource "null_resource" "run_ansible" {
   }
   
 }
-}
 
