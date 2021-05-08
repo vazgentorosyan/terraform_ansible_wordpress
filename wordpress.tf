@@ -68,7 +68,7 @@ resource "aws_instance" "wordpress" {
 
 resource "null_resource" "run_ansible" {
   provisioner "local-exec" {
-    command = "sleep 40 && ansible-playbook -i inventory playbook.yml"
+    command = "sleep 120 && ansible-playbook -i inventory playbook.yml"
   
   }
   depends_on = [
