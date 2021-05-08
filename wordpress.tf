@@ -63,11 +63,14 @@ resource "aws_instance" "wordpress" {
   instance_type = "t2.micro"
   vpc_security_group_ids = ["${aws_security_group.allow_http_and_ssh.id}"]
   key_name = "epam-new"
+
+}
+
+resource "null_resource" "run_ansible" {
   provisioner "local-exec" {
-    command = "ansible-playbook -i inventory playbook.yml"
-    
+    command = "sleep 40 && ansible-playbook -i inventory playbook.yml"
   
   }
-
+  
 }
 
